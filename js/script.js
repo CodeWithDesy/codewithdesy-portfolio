@@ -57,7 +57,7 @@
         const contactForm = document.getElementById('contactForm');
         const successMessage = document.getElementById('successMessage');
 
-        contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit',  async function(e) {
             e.preventDefault();
 
             // Get form data
@@ -75,23 +75,22 @@
             console.log('Form submitted:', formData);
 
             // TODO: Replace this with your actual backend API call
-            // Example:
-            // fetch('YOUR_BACKEND_API_URL/contact', {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //     },
-            //     body: JSON.stringify(formData)
-            // })
-            // .then(response => response.json())
-            // .then(data => {
-            //     successMessage.classList.add('show');
-            //     contactForm.reset();
-            // })
-            // .catch(error => {
-            //     console.error('Error:', error);
-            //     alert('There was an error sending your message. Please try again.');
-            // });
+            const response = await fetch('https://contact-nodemailer.onrender.com/api/message', {
+                 method: 'POST',
+                 headers: {
+                     'Content-Type': 'application/json',
+                 },
+                 body: JSON.stringify(formData)
+             })
+             .then(response => response.json())
+             .then(data => {
+                 successMessage.classList.add('show');
+                 contactForm.reset();
+             })
+             .catch(error => {
+                 console.error('Error:', error);
+                 alert('There was an error sending your message. Please try again.');
+             });
 
             // Reset form after submission
             setTimeout(() => {
