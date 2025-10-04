@@ -98,7 +98,7 @@
 
         .hero-subtitle {
             font-size: clamp(1.2rem, 3vw, 2rem);
-            color: var(--secondary-color);
+            color: white;
             margin-bottom: 1rem;
             opacity: 0;
             animation: slideUp 1s ease 0.2s forwards;
@@ -106,7 +106,7 @@
 
         .hero-description {
             font-size: 1.1rem;
-            color: var(--text-light);
+            color: rgb(93, 93, 107);
             max-width: 600px;
             margin-bottom: 3rem;
             opacity: 0;
@@ -571,7 +571,7 @@
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
             .nav-links {
-                display: none;
+                display: contents;
             }
 
             .hero {
@@ -595,6 +595,10 @@
 
             .skills {
                 justify-content: center;
+            }
+
+            .hero-title {
+                font-size: 3rem;
             }
         }
 
@@ -646,7 +650,7 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
             color: var(--primary-color);
-            background: #fafafa;
+            background: #161941e7;
             overflow-x: hidden;
         }
 
@@ -695,6 +699,16 @@
             color: var(--accent-color);
         }
 
+        /* ✅ NEW: Hamburger Menu Button */
+        .mobile-menu-toggle {
+            display: none;                    /* Hidden on desktop */
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
         /* Hero Section */
         .hero {
             min-height: 100vh;
@@ -720,7 +734,7 @@
 
         .hero-subtitle {
             font-size: clamp(1.2rem, 3vw, 2rem);
-            color: var(--secondary-color);
+            color: white;
             margin-bottom: 1rem;
             opacity: 0;
             animation: slideUp 1s ease 0.2s forwards;
@@ -984,7 +998,15 @@
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
-            }
+                 position: absolute;           /* Floats over content */
+                 top: 100%;                    /* Right below header */
+                 left: 0;
+                 width: 100%;                  /* Full width */
+                 background: rgba(255, 255, 255, 0.98);
+                 flex-direction: column;       /* Stack vertically */
+                 padding: 1rem 0;
+                 box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1)
+                }
 
             .hero {
                 padding: 0 1rem;
@@ -1007,6 +1029,18 @@
 
             .skills {
                 justify-content: center;
+            }
+
+             .nav-links.active {
+             display: flex;                /* ✅ Shows when active */
+            }
+
+            .nav-links a {
+            padding: 0.8rem 2rem;         /* Bigger touch targets */
+            }
+
+            .mobile-menu-toggle {
+            display: block;               /* ✅ Show hamburger on mobile */
             }
         }
 
@@ -1044,7 +1078,13 @@
     <header class="header">
         <nav class="nav">
             <a href="#" class="logo">CodeWithDesy</a>
-            <ul class="nav-links">
+
+             <!-- ✅ NEW: Hamburger Menu Button -->
+        <button class="mobile-menu-toggle" id="mobileMenuToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+
+            <ul class="nav-links" id="navLinks">
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -1069,7 +1109,7 @@
     <section id="projects" class="section">
         <div class="container">
             <h2 class="section-title fade-in">FEATURED PROJECTS</h2>
-            <p class="fade-in" style="text-align: center; color: var(--secondary-color); margin-bottom: 4rem;">
+            <p class="fade-in" style="text-align: center; color: whitesmoke; margin-bottom: 4rem;">
                 Here are some of the selected projects that showcase my passion for backend development.
             </p>
             
