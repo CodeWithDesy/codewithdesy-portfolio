@@ -70,7 +70,7 @@ contactForm.addEventListener('submit', async function(e) {
 
   try {
     // Send data to backend
-    const response = await fetch('https://contact-nodemailer-api.onrender.com/api/message', {
+    const response = await fetch('https://contact-nodemailer-api.onrender.com/message', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
