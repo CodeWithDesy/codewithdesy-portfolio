@@ -54,50 +54,54 @@
         });
 
         // Contact Form Handler
-        const contactForm = document.getElementById('contactForm');
-        const successMessage = document.getElementById('successMessage');
+const contactForm = document.getElementById('contactForm');
+const successMessage = document.getElementById('successMessage');
 
-        contactForm.addEventListener('submit',  async function(e) {
-            e.preventDefault();
+contactForm.addEventListener('submit', async function(e) {
+  e.preventDefault();
 
-            // Get form data
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                subject: document.getElementById('subject').value,
-                message: document.getElementById('message').value
-            };
+  // Collect form data
+  const formData = {
+    name: document.getElementById('name').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    subject: document.getElementById('subject').value.trim(),
+    message: document.getElementById('message').value.trim()
+  };
 
-            // Show success message
-            successMessage.classList.add('show');
+  try {
+    // Send data to backend
+    const response = await fetch('https://contact-nodemailer-api.onrender.com/api/message', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData)
+    });
 
-            // Log form data (you'll replace this with your backend API call)
-            console.log('Form submitted:', formData);
+    if (!response.ok) {
+      throw new Error('Failed to send message');
+    }
 
-            // TODO: Replace this with your actual backend API call
-            const response = await fetch('https://contact-nodemailer-api.onrender.com/api/message', {
-                 method: 'POST',
-                 headers: {
-                     'Content-Type': 'application/json',
-                 },
-                 body: JSON.stringify(formData)
-             })
-             .then(response => response.json())
-             .then(data => {
-                 successMessage.classList.add('show');
-                 contactForm.reset();
-             })
-             .catch(error => {
-                 console.error('Error:', error);
-                 alert('There was an error sending your message. Please try again.');
-             });
+    const data = await response.json();
+    console.log('Success:', data);
 
-            // Reset form after submission
-            setTimeout(() => {
-                contactForm.reset();
-                successMessage.classList.remove('show');
-            }, 5000);
-        });
+    // Show success message
+    successMessage.classList.add('show');
+
+    // Reset form after success
+    contactForm.reset();
+
+    // Hide success message after 5 seconds
+    setTimeout(() => {
+      successMessage.classList.remove('show');
+    }, 5000);
+
+  } catch (error) {
+    console.error('Error:', error);
+    alert('There was an error sending your message. Please try again.');
+  }
+});
+
 
         // Add floating animation to form on scroll
         const contactFormElement = document.querySelector('.contact-form');
