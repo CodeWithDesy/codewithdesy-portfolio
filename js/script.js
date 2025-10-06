@@ -78,15 +78,15 @@ contactForm.addEventListener('submit', async function(e) {
       body: JSON.stringify(formData)
     });
 
-    if (!response.ok) {
-      throw new Error('Failed to send message');
-    }
-
     const data = await response.json();
     console.log('Success:', data);
 
     // Show success message
     successMessage.classList.add('show');
+
+    if (!response.ok) {
+      throw new Error('Failed to send message');
+    }
 
     // Reset form after success
     contactForm.reset();
