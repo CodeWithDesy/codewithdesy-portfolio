@@ -75,7 +75,7 @@
             console.log('Form submitted:', formData);
 
             // TODO: Replace this with your actual backend API call
-            const response = await fetch('https://contact-nodemailer.onrender.com/api/message', {
+            const response = await fetch('https://contact-nodemailer-api.onrender.com/api/message', {
                  method: 'POST',
                  headers: {
                      'Content-Type': 'application/json',
