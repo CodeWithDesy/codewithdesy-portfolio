@@ -1491,15 +1491,15 @@ contactForm.addEventListener('submit', async function(e) {
       body: JSON.stringify(formData)
     });
 
-    const data = await response.json();
-    console.log('Success:', data);
-
-    // Show success message
-    successMessage.classList.add('show');
-
     if (!response.ok) {
       throw new Error('Failed to send message');
     }
+
+    const data = await response.json();
+    console.log('Success:', data);
+
+    // Show success message AFTER confirming success
+    successMessage.classList.add('show');
 
     // Reset form after success
     contactForm.reset();
